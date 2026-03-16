@@ -6,8 +6,10 @@
   <title>bu banking — Log in</title>
   <style>
     :root {
+      color-scheme: light dark;
       --bg: #eff4fb;
-      --panel: rgba(255, 255, 255, 0.94);
+      --bg-2: #e8eef8;
+      --panel: rgba(255, 255, 255, 0.92);
       --panel-solid: #ffffff;
       --panel-muted: #f4f7fb;
       --text: #142033;
@@ -15,7 +17,6 @@
       --border: #d7e0eb;
       --primary: #0d4fd6;
       --primary-hover: #0a3faa;
-      --primary-deep: #0a2f7a;
       --focus: #ffbf47;
       --success: #0f766e;
       --hero-start: #0a2d73;
@@ -26,516 +27,186 @@
       --radius: 24px;
     }
 
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #09111f;
+        --bg-2: #0d1728;
+        --panel: rgba(10, 18, 32, 0.86);
+        --panel-solid: #0f1b31;
+        --panel-muted: #122038;
+        --text: #f3f7ff;
+        --muted: #b2bfd3;
+        --border: #25334d;
+        --primary: #5a8fff;
+        --primary-hover: #7ca6ff;
+        --success: #5fd0b7;
+        --hero-start: #061b46;
+        --hero-mid: #0b347f;
+        --hero-end: #1659cf;
+        --shadow: 0 22px 56px rgba(0, 0, 0, 0.38);
+        --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.26);
+      }
+    }
+
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
-
     body {
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, #dce8ff 0, transparent 30%),
-        linear-gradient(180deg, #eef4ff 0%, var(--bg) 42%, #edf2f7 100%);
+        radial-gradient(circle at top left, rgba(110, 159, 255, 0.22) 0, transparent 30%),
+        linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 44%, var(--bg-2) 100%);
       color: var(--text);
       min-height: 100vh;
     }
-
-    a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
+    a { color: var(--primary); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
 
-    a:focus-visible,
-    button:focus-visible,
-    input:focus-visible {
-      outline: 3px solid var(--focus);
-      outline-offset: 3px;
-    }
-
-    .page {
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      padding: 1.25rem;
-    }
-
+    .page { min-height: 100vh; display: grid; place-items: center; padding: 1.25rem; }
     .shell {
-      width: min(1180px, 100%);
+      width: min(1220px, 100%);
       min-height: min(92vh, 860px);
       display: grid;
-      grid-template-columns: 1.05fr minmax(420px, 500px);
+      grid-template-columns: 1.08fr minmax(420px, 500px);
       gap: 1rem;
       align-items: stretch;
     }
-
-    .hero,
-    .card {
-      border-radius: var(--radius);
-      overflow: hidden;
-    }
+    .hero, .card { border-radius: var(--radius); overflow: hidden; }
 
     .hero {
       position: relative;
       background: linear-gradient(155deg, var(--hero-start) 0%, var(--hero-mid) 52%, var(--hero-end) 100%);
       color: white;
       box-shadow: var(--shadow);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 0;
-    }
-
-    .hero::before,
-    .hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.09);
-      z-index: 0;
-    }
-
-    .hero::before {
-      width: 280px;
-      height: 280px;
-      top: -100px;
-      right: -70px;
-    }
-
-    .hero::after {
-      width: 200px;
-      height: 200px;
-      bottom: -70px;
-      left: -50px;
-    }
-
-    .hero > * { position: relative; z-index: 1; }
-
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.9rem;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-      font-size: 1.08rem;
-    }
-
-    .logo {
-      width: 3rem;
-      height: 3rem;
-      border-radius: 16px;
-      background: rgba(255,255,255,0.14);
-      border: 1px solid rgba(255,255,255,0.24);
-      display: grid;
-      place-items: center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.12);
-      flex: 0 0 auto;
-    }
-
-    .logo svg {
-      width: 1.75rem;
-      height: 1.75rem;
-      display: block;
-    }
-
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.05;
-    }
-
-    .brand-text small {
-      font-size: 0.72rem;
-      font-weight: 600;
-      opacity: 0.82;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .hero-copy {
-      margin: 1.2rem 0 1.5rem;
-    }
-
-    .hero h1 {
-      margin: 0 0 0.75rem;
-      font-size: clamp(2rem, 4vw, 3.15rem);
-      line-height: 1.02;
-      max-width: 9ch;
-    }
-
-    .hero p {
-      margin: 0;
-      max-width: 48ch;
-      color: rgba(255,255,255,0.9);
-      font-size: 1rem;
-      line-height: 1.55;
-    }
-
-    .trust-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.8rem;
-      margin-top: 1.2rem;
-    }
-
-    .trust-card {
-      padding: 0.95rem;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.11);
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(6px);
-    }
-
-    .trust-card strong {
-      display: block;
-      font-size: 0.96rem;
-      margin-bottom: 0.18rem;
-    }
-
-    .trust-card span {
-      display: block;
-      color: rgba(255,255,255,0.82);
-      font-size: 0.9rem;
-      line-height: 1.4;
-    }
-
-    .hero-bottom {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 1rem;
-      align-items: end;
-      margin-top: 1.3rem;
-    }
-
-    .hero-note {
-      color: rgba(255,255,255,0.78);
-      font-size: 0.92rem;
-      line-height: 1.45;
-    }
-
-    .mini-card {
-      width: 220px;
-      padding: 1rem;
-      border-radius: 18px;
-      background: linear-gradient(140deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08));
-      border: 1px solid rgba(255,255,255,0.2);
-      box-shadow: var(--shadow-soft);
-      backdrop-filter: blur(8px);
-    }
-
-    .mini-card-top,
-    .mini-card-bottom {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .mini-card-top {
-      margin-bottom: 1.6rem;
-      font-size: 0.78rem;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.82);
-    }
-
-    .mini-chip {
-      width: 2rem;
-      height: 1.5rem;
-      border-radius: 8px;
-      background: linear-gradient(135deg, #ffdb82, #f5b326);
-    }
-
-    .mini-card-number {
-      font-size: 1rem;
-      letter-spacing: 0.16em;
-      margin-bottom: 0.9rem;
-      color: rgba(255,255,255,0.95);
-    }
-
-    .mini-card-bottom {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.82);
-    }
-
-    .card-wrap {
-      display: grid;
-      place-items: center;
-    }
-
-    .card {
-      width: 100%;
-      background: var(--panel);
-      border: 1px solid rgba(18, 32, 63, 0.08);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(10px);
       padding: 1.7rem;
       display: grid;
-      align-content: center;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--success);
-      background: #ebfbf6;
-      border: 1px solid #c5efe4;
-      border-radius: 999px;
-      padding: 0.42rem 0.78rem;
-      font-size: 0.88rem;
-      font-weight: 700;
-      width: fit-content;
-    }
-
-    .card h2 {
-      margin: 0.95rem 0 0.35rem;
-      font-size: 1.85rem;
-      line-height: 1.1;
-    }
-
-    .card-intro {
-      margin: 0 0 1.15rem;
-      color: var(--muted);
-      line-height: 1.5;
-      font-size: 0.96rem;
-    }
-
-    form {
-      display: grid;
-      gap: 0.9rem;
-    }
-
-    .field {
-      display: grid;
-      gap: 0.4rem;
-    }
-
-    label {
-      font-weight: 700;
-      font-size: 0.94rem;
-    }
-
-    .hint {
-      color: var(--muted);
-      font-size: 0.85rem;
-      line-height: 1.35;
-    }
-
-    input {
-      width: 100%;
-      min-height: 3.15rem;
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 0.82rem 0.95rem;
-      font: inherit;
-      color: var(--text);
-      background: var(--panel-solid);
-      transition: border-color 120ms ease, box-shadow 120ms ease;
-    }
-
-    input::placeholder {
-      color: #7d8898;
-    }
-
-    input:hover,
-    input:focus-visible {
-      border-color: #9eb6e9;
-      box-shadow: 0 0 0 4px rgba(13, 79, 214, 0.08);
-    }
-
-    .inline-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      grid-template-rows: auto auto 1fr auto;
       gap: 1rem;
-      flex-wrap: wrap;
+    }
+    .hero::before, .hero::after {
+      content: ""; position: absolute; border-radius: 999px; background: rgba(255,255,255,0.09); z-index: 0;
+    }
+    .hero::before { width: 280px; height: 280px; top: -100px; right: -70px; }
+    .hero::after { width: 200px; height: 200px; bottom: -70px; left: -50px; }
+    .hero > * { position: relative; z-index: 1; }
+
+    .hero-topbar {
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
+    }
+    .brand { display: inline-flex; align-items: center; gap: 0.9rem; font-weight: 800; letter-spacing: 0.01em; font-size: 1.08rem; }
+    .logo {
+      width: 3.1rem; height: 3.1rem; border-radius: 18px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.24);
+      display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 8px 20px rgba(2,12,38,0.16); flex: 0 0 auto;
+    }
+    .logo svg { width: 1.8rem; height: 1.8rem; display: block; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
+    .brand-text small { font-size: 0.72rem; font-weight: 600; opacity: 0.84; letter-spacing: 0.08em; text-transform: uppercase; }
+
+    .hero-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .hero-pill {
+      padding: 0.48rem 0.8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.92); font-size: 0.84rem; font-weight: 600;
     }
 
-    .check {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      color: var(--muted);
-      font-size: 0.93rem;
-      line-height: 1.35;
-    }
+    .hero-copy h1 { margin: 0 0 0.75rem; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.02; max-width: 9ch; }
+    .hero-copy p { margin: 0; max-width: 50ch; color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.55; }
 
-    .check input {
-      width: 1.05rem;
-      height: 1.05rem;
-      min-height: auto;
-      margin: 0;
-      accent-color: var(--primary);
-      flex: 0 0 auto;
-      box-shadow: none;
+    .app-preview {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0.9rem; align-items: stretch;
     }
+    .preview-panel, .mini-side {
+      background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.15); border-radius: 22px; backdrop-filter: blur(8px);
+    }
+    .preview-panel { padding: 1rem; }
+    .preview-head { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-bottom: 0.9rem; }
+    .preview-title { font-size: 0.95rem; font-weight: 700; }
+    .preview-sub { color: rgba(255,255,255,0.78); font-size: 0.82rem; }
+    .balance-card {
+      padding: 1rem; border-radius: 18px; background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.07)); border: 1px solid rgba(255,255,255,0.14); margin-bottom: 0.9rem;
+    }
+    .balance-label { color: rgba(255,255,255,0.74); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; }
+    .balance-value { font-size: 1.9rem; font-weight: 800; margin: 0.35rem 0; }
+    .balance-meta { display: flex; gap: 0.6rem; flex-wrap: wrap; color: rgba(255,255,255,0.8); font-size: 0.85rem; }
+    .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
+    .quick-actions span {
+      display: grid; place-items: center; min-height: 4.2rem; padding: 0.6rem; border-radius: 16px; background: rgba(255,255,255,0.1); font-size: 0.85rem; text-align: center;
+    }
+    .mini-side { padding: 1rem; display: grid; gap: 0.8rem; }
+    .mini-card {
+      padding: 1rem; border-radius: 18px; background: linear-gradient(140deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08)); border: 1px solid rgba(255,255,255,0.2); box-shadow: var(--shadow-soft);
+    }
+    .mini-card-top, .mini-card-bottom { display: flex; justify-content: space-between; align-items: center; }
+    .mini-card-top { margin-bottom: 1.4rem; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.82); }
+    .mini-chip { width: 2rem; height: 1.5rem; border-radius: 8px; background: linear-gradient(135deg, #ffdb82, #f5b326); }
+    .mini-card-number { font-size: 0.98rem; letter-spacing: 0.16em; margin-bottom: 0.9rem; color: rgba(255,255,255,0.95); }
+    .mini-card-bottom { font-size: 0.78rem; color: rgba(255,255,255,0.82); }
+    .mini-stat { padding: 0.85rem 0.9rem; border-radius: 16px; background: rgba(255,255,255,0.09); }
+    .mini-stat strong { display: block; font-size: 1rem; }
+    .mini-stat span { font-size: 0.82rem; color: rgba(255,255,255,0.78); }
 
+    .hero-note { color: rgba(255,255,255,0.78); font-size: 0.92rem; line-height: 1.45; }
+
+    .card-wrap { display: grid; place-items: center; }
+    .card {
+      width: 100%; background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); box-shadow: var(--shadow); backdrop-filter: blur(10px);
+      padding: 1.5rem; display: grid; align-content: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 0.5rem; color: var(--success); background: color-mix(in srgb, var(--success) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--success) 24%, transparent); border-radius: 999px; padding: 0.42rem 0.78rem; font-size: 0.88rem; font-weight: 700; width: fit-content;
+    }
+    .card h2 { margin: 0.95rem 0 0.35rem; font-size: 1.85rem; line-height: 1.1; }
+    .card-intro { margin: 0 0 1rem; color: var(--muted); line-height: 1.5; font-size: 0.95rem; }
+    .shortcut-row { display: flex; gap: 0.55rem; flex-wrap: wrap; margin-bottom: 1rem; }
+    .shortcut { padding: 0.5rem 0.75rem; border-radius: 999px; background: var(--panel-muted); border: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; font-weight: 700; }
+    form { display: grid; gap: 0.85rem; }
+    .field { display: grid; gap: 0.38rem; }
+    label { font-weight: 700; font-size: 0.94rem; }
+    .hint { color: var(--muted); font-size: 0.85rem; line-height: 1.35; }
+    input {
+      width: 100%; min-height: 3.1rem; border: 1px solid var(--border); border-radius: 14px; padding: 0.82rem 0.95rem; font: inherit; color: var(--text);
+      background: var(--panel-solid); transition: border-color 120ms ease, box-shadow 120ms ease;
+    }
+    input::placeholder { color: color-mix(in srgb, var(--muted) 85%, transparent); }
+    input:hover, input:focus-visible { border-color: color-mix(in srgb, var(--primary) 45%, white); box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent); }
+    .inline-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .check { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--muted); font-size: 0.93rem; line-height: 1.35; }
+    .check input { width: 1.05rem; height: 1.05rem; min-height: auto; margin: 0; accent-color: var(--primary); flex: 0 0 auto; box-shadow: none; }
     .btn {
-      width: 100%;
-      min-height: 3.2rem;
-      border: 0;
-      border-radius: 14px;
-      font: inherit;
-      font-weight: 800;
-      cursor: pointer;
-      transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
+      width: 100%; min-height: 3.2rem; border: 0; border-radius: 14px; font: inherit; font-weight: 800; cursor: pointer; transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
     }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(180deg, #1862ec 0%, var(--primary) 100%);
-      color: white;
-      box-shadow: 0 14px 24px rgba(13, 79, 214, 0.22);
-    }
-
-    .btn-primary:hover {
-      background: linear-gradient(180deg, #1557d2 0%, var(--primary-hover) 100%);
-    }
-
-    .btn-secondary {
-      background: var(--panel-muted);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-
-    .or {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      gap: 0.75rem;
-      align-items: center;
-      color: var(--muted);
-      font-size: 0.9rem;
-      margin: 0.05rem 0;
-    }
-
-    .or::before,
-    .or::after {
-      content: "";
-      height: 1px;
-      background: var(--border);
-    }
-
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 80%, white) 0%, var(--primary) 100%); color: white; box-shadow: 0 14px 24px color-mix(in srgb, var(--primary) 24%, transparent); }
+    .btn-primary:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--primary-hover) 75%, white) 0%, var(--primary-hover) 100%); }
+    .btn-secondary { background: var(--panel-muted); color: var(--text); border: 1px solid var(--border); }
+    .or { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.75rem; align-items: center; color: var(--muted); font-size: 0.9rem; margin: 0.05rem 0; }
+    .or::before, .or::after { content: ""; height: 1px; background: var(--border); }
     .support-box {
-      margin-top: 1.05rem;
-      padding: 0.95rem 1rem;
-      border-radius: 16px;
-      background: var(--panel-muted);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: 0.93rem;
+      margin-top: 1rem; padding: 0.95rem 1rem; border-radius: 16px; background: var(--panel-muted); border: 1px solid var(--border); color: var(--muted); line-height: 1.45; font-size: 0.93rem;
     }
-
-    .support-box strong {
-      display: block;
-      margin-bottom: 0.28rem;
-      color: var(--text);
-      font-size: 0.96rem;
-    }
-
-    .sub-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.8rem 1rem;
-      margin-top: 0.8rem;
-      font-size: 0.92rem;
-    }
-
-    .legal {
-      margin-top: 0.95rem;
-      color: var(--muted);
-      font-size: 0.82rem;
-      line-height: 1.4;
-    }
+    .support-box strong { display: block; margin-bottom: 0.28rem; color: var(--text); font-size: 0.96rem; }
+    .sub-links { display: flex; flex-wrap: wrap; gap: 0.8rem 1rem; margin-top: 0.8rem; font-size: 0.92rem; }
+    .legal { margin-top: 0.85rem; color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
 
     @media (max-width: 1100px) {
-      .shell {
-        grid-template-columns: 1fr 460px;
-      }
-
-      .trust-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-bottom {
-        grid-template-columns: 1fr;
-      }
+      .shell { grid-template-columns: 1fr 460px; }
+      .app-preview { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 920px) {
-      .page {
-        padding: 0.85rem;
-      }
-
-      .shell {
-        min-height: auto;
-        grid-template-columns: 1fr;
-      }
-
-      .hero,
-      .card {
-        min-height: auto;
-      }
-
-      .mini-card {
-        width: 100%;
-        max-width: 260px;
-      }
+      .page { padding: 0.85rem; }
+      .shell { min-height: auto; grid-template-columns: 1fr; }
+      .hero, .card { min-height: auto; }
     }
-
     @media (max-width: 640px) {
-      body {
-        background: linear-gradient(180deg, #eef4ff 0%, #f5f8fc 100%);
-      }
-
-      .page {
-        padding: 0.7rem;
-      }
-
-      .hero,
-      .card {
-        padding: 1.2rem;
-        border-radius: 20px;
-      }
-
-      .hero-copy {
-        margin-bottom: 1rem;
-      }
-
-      .hero h1 {
-        max-width: none;
-        font-size: 1.95rem;
-      }
-
-      .hero p {
-        font-size: 0.96rem;
-      }
-
-      .trust-grid {
-        gap: 0.7rem;
-      }
-
-      .trust-card {
-        padding: 0.82rem;
-      }
-
-      .card h2 {
-        font-size: 1.6rem;
-      }
-
-      input,
-      .btn {
-        min-height: 3.45rem;
-      }
-
-      .sub-links {
-        flex-direction: column;
-        gap: 0.55rem;
-      }
+      .page { padding: 0.7rem; }
+      .hero, .card { padding: 1.15rem; border-radius: 20px; }
+      .hero-copy h1 { max-width: none; font-size: 1.95rem; }
+      .hero-copy p { font-size: 0.96rem; }
+      .quick-actions { grid-template-columns: 1fr 1fr 1fr; }
+      .card h2 { font-size: 1.6rem; }
+      input, .btn { min-height: 3.45rem; }
+      .sub-links { flex-direction: column; gap: 0.55rem; }
     }
   </style>
 </head>
@@ -543,12 +214,12 @@
   <main class="page">
     <div class="shell">
       <section class="hero" aria-labelledby="welcome-heading">
-        <div>
+        <div class="hero-topbar">
           <div class="brand" aria-label="bu banking">
             <div class="logo" aria-hidden="true">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="10" y="10" width="44" height="44" rx="14" fill="white" fill-opacity="0.12"/>
-                <path d="M24 21H36.5C41.7 21 45 24 45 28.7C45 32.2 43 34.8 39.8 35.6C43.7 36.3 46 39 46 42.8C46 48.1 42.2 51 36.1 51H24V21ZM35 33.3C38.1 33.3 40 31.8 40 29.1C40 26.5 38.2 25 35 25H28.8V33.3H35ZM35.8 47C39.4 47 41.3 45.5 41.3 42.6C41.3 39.7 39.3 38.1 35.5 38.1H28.8V47H35.8Z" fill="white"/>
+                <rect x="8" y="8" width="48" height="48" rx="16" fill="white" fill-opacity="0.12"/>
+                <path d="M22 19H35.8C41.4 19 45 22.2 45 27.2C45 30.8 43 33.4 39.8 34.3C44 35.1 46.4 38 46.4 42C46.4 47.7 42.3 51 35.6 51H22V19ZM34.2 32.2C37.5 32.2 39.4 30.7 39.4 28C39.4 25.2 37.6 23.8 34.2 23.8H27V32.2H34.2ZM35 46.2C38.9 46.2 41 44.6 41 41.6C41 38.5 38.9 36.8 34.9 36.8H27V46.2H35Z" fill="white"/>
               </svg>
             </div>
             <div class="brand-text">
@@ -556,52 +227,72 @@
               <small>secure personal banking</small>
             </div>
           </div>
-
-          <div class="hero-copy">
-            <h1 id="welcome-heading">Secure banking with less friction.</h1>
-            <p>
-              A cleaner sign-in experience for everyday users — simple to read, quick to use, and designed to feel credible on both laptop and mobile.
-            </p>
-          </div>
-
-          <div class="trust-grid" aria-label="Key benefits">
-            <div class="trust-card">
-              <strong>Fast access</strong>
-              <span>Clear fields, obvious actions, and less clutter.</span>
-            </div>
-            <div class="trust-card">
-              <strong>Built for trust</strong>
-              <span>Security cues, recovery links, and strong contrast.</span>
-            </div>
-            <div class="trust-card">
-              <strong>Works everywhere</strong>
-              <span>Polished for laptop screens and mobile devices.</span>
-            </div>
+          <div class="hero-actions" aria-label="Product highlights">
+            <span class="hero-pill">24/7 monitoring</span>
+            <span class="hero-pill">Instant transfers</span>
+            <span class="hero-pill">Face ID ready</span>
           </div>
         </div>
 
-        <div class="hero-bottom">
-          <p class="hero-note">Protected with encryption, device verification, and optional biometric sign-in on supported devices.</p>
+        <div class="hero-copy">
+          <h1 id="welcome-heading">Secure banking with less friction.</h1>
+          <p>A cleaner sign-in experience for everyday users — simple to read, quick to use, and designed to feel credible on both laptop and mobile.</p>
+        </div>
 
-          <div class="mini-card" aria-hidden="true">
-            <div class="mini-card-top">
-              <span>bu banking</span>
-              <span class="mini-chip"></span>
+        <div class="app-preview" aria-label="Banking app preview">
+          <div class="preview-panel">
+            <div class="preview-head">
+              <div>
+                <div class="preview-title">Everyday account</div>
+                <div class="preview-sub">A quick glimpse of the app after sign-in</div>
+              </div>
+              <div class="hero-pill">Live preview</div>
             </div>
-            <div class="mini-card-number">•••• 2846</div>
-            <div class="mini-card-bottom">
-              <span>Everyday account</span>
-              <span>Visa</span>
+            <div class="balance-card">
+              <div class="balance-label">Available balance</div>
+              <div class="balance-value">£4,280.24</div>
+              <div class="balance-meta">
+                <span>Salary received</span>
+                <span>•</span>
+                <span>Updated just now</span>
+              </div>
+            </div>
+            <div class="quick-actions">
+              <span>Send money</span>
+              <span>Pay bills</span>
+              <span>Freeze card</span>
             </div>
           </div>
+          <div class="mini-side">
+            <div class="mini-card" aria-hidden="true">
+              <div class="mini-card-top">
+                <span>bu banking</span>
+                <span class="mini-chip"></span>
+              </div>
+              <div class="mini-card-number">•••• 2846</div>
+              <div class="mini-card-bottom">
+                <span>Everyday account</span>
+                <span>Visa</span>
+              </div>
+            </div>
+            <div class="mini-stat"><strong>Protected</strong><span>Encryption, device checks, and fraud monitoring enabled.</span></div>
+            <div class="mini-stat"><strong>Accessible</strong><span>Readable contrast, keyboard support, and larger touch targets.</span></div>
+          </div>
         </div>
+
+        <p class="hero-note">Protected with encryption, device verification, and optional biometric sign-in on supported devices.</p>
       </section>
 
       <section class="card-wrap" aria-label="Login panel">
         <div class="card">
           <span class="eyebrow" aria-label="Security notice">🔒 Secure login</span>
           <h2>Welcome back</h2>
-          <p class="card-intro">Sign in with your email or customer ID. Everything you need is on this page, with no extra scrolling on laptop.</p>
+          <p class="card-intro">Sign in with your email or customer ID. This layout is designed to fit on one laptop screen while still feeling polished on mobile.</p>
+          <div class="shortcut-row" aria-label="Secondary actions">
+            <a class="shortcut" href="signup.html">Create account</a>
+            <a class="shortcut" href="forgot-password.html">Reset password</a>
+            <span class="shortcut">Desktop + mobile ready</span>
+          </div>
 
           <form action="#" method="post">
             <div class="field">
@@ -613,7 +304,7 @@
             <div class="field">
               <div class="inline-row">
                 <label for="password">Password</label>
-                <a href="#">Forgot password?</a>
+                <a href="forgot-password.html">Forgot password?</a>
               </div>
               <input id="password" name="password" type="password" autocomplete="current-password" placeholder="Enter your password" />
             </div>
@@ -627,9 +318,7 @@
             </div>
 
             <button class="btn btn-primary" type="submit">Log in securely</button>
-
             <div class="or">or</div>
-
             <button class="btn btn-secondary" type="button" aria-describedby="biometric-note">Use Face ID / Fingerprint</button>
             <span class="hint" id="biometric-note">Available on supported devices and browsers.</span>
           </form>
@@ -638,8 +327,8 @@
             <strong>Need help getting in?</strong>
             Recover your account, unlock access, or report suspicious activity right away.
             <div class="sub-links">
-              <a href="#">Recover account</a>
-              <a href="#">Unlock account</a>
+              <a href="signup.html">Open a new account</a>
+              <a href="forgot-password.html">Recover account</a>
               <a href="#">Report fraud</a>
             </div>
           </div>

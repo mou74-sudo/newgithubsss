@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>bu banking — Create account</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#eff4fb; --panel:#ffffff; --muted:#5e6a7f; --text:#142033; --border:#d7e0eb; --primary:#0d4fd6; --focus:#ffbf47; --radius:24px; --shadow:0 22px 56px rgba(12,32,77,.14); }
+    @media (prefers-color-scheme: dark){ :root { --bg:#09111f; --panel:#0f1b31; --muted:#b2bfd3; --text:#f3f7ff; --border:#25334d; --primary:#5a8fff; --shadow:0 22px 56px rgba(0,0,0,.38);} }
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,sans-serif;background:linear-gradient(180deg,var(--bg),color-mix(in srgb,var(--bg) 88%, black));color:var(--text);min-height:100vh;display:grid;place-items:center;padding:1rem} a{color:var(--primary);text-decoration:none} a:hover{text-decoration:underline} a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+    .wrap{width:min(920px,100%);display:grid;grid-template-columns:1fr 1fr;gap:1rem}.panel,.form{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)} .panel{padding:1.5rem;background:linear-gradient(155deg,#0a2d73,#2a79f0);color:#fff}.form{padding:1.5rem}.logo{font-weight:800;margin-bottom:1rem}.form h1{margin:.2rem 0 .4rem}.grid{display:grid;gap:.85rem}.two{display:grid;grid-template-columns:1fr 1fr;gap:.85rem} label{font-weight:700;font-size:.94rem}.field{display:grid;gap:.38rem} input{width:100%;min-height:3.1rem;border:1px solid var(--border);border-radius:14px;padding:.82rem .95rem;font:inherit;color:var(--text);background:transparent}.btn{width:100%;min-height:3.2rem;border:0;border-radius:14px;font:inherit;font-weight:800;cursor:pointer;background:var(--primary);color:#fff}.muted{color:var(--muted);line-height:1.5}.steps{display:grid;gap:.8rem;margin-top:1.2rem}.step{padding:.9rem;border-radius:16px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.16)} @media (max-width:760px){.wrap{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="panel">
+      <div class="logo">bu banking</div>
+      <h2>Open your account in minutes.</h2>
+      <p class="muted" style="color:rgba(255,255,255,.86)">A straightforward sign-up flow for everyday customers with a focus on clarity and trust.</p>
+      <div class="steps">
+        <div class="step"><strong>1. Add your details</strong><br>Basic information first, no unnecessary friction.</div>
+        <div class="step"><strong>2. Verify your identity</strong><br>Keep account creation secure and compliant.</div>
+        <div class="step"><strong>3. Start banking</strong><br>View balances, cards, and payments in one place.</div>
+      </div>
+    </section>
+    <section class="form">
+      <a href="index.html">← Back to login</a>
+      <h1>Create account</h1>
+      <p class="muted">Use this page as the first step in the bu banking onboarding flow.</p>
+      <form class="grid">
+        <div class="two">
+          <div class="field"><label for="first">First name</label><input id="first" type="text" placeholder="Alex"></div>
+          <div class="field"><label for="last">Last name</label><input id="last" type="text" placeholder="Taylor"></div>
+        </div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="alex@email.com"></div>
+        <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" placeholder="07123 456789"></div>
+        <div class="two">
+          <div class="field"><label for="pass">Create password</label><input id="pass" type="password" placeholder="Create a secure password"></div>
+          <div class="field"><label for="confirm">Confirm password</label><input id="confirm" type="password" placeholder="Repeat password"></div>
+        </div>
+        <button class="btn" type="button">Continue</button>
+      </form>
+    </section>
+  </main>
+</body>
+</html>
