@@ -7,43 +7,47 @@
   <style>
     :root {
       color-scheme: light dark;
-      --bg: #eff4fb;
-      --bg-2: #e8eef8;
+      --bg: #f4f2fb;
+      --bg-2: #ece8f8;
       --panel: rgba(255, 255, 255, 0.92);
       --panel-solid: #ffffff;
-      --panel-muted: #f4f7fb;
-      --text: #142033;
-      --muted: #5e6a7f;
-      --border: #d7e0eb;
-      --primary: #0d4fd6;
-      --primary-hover: #0a3faa;
+      --panel-muted: #f6f2fb;
+      --text: #1d1830;
+      --muted: #6a6480;
+      --border: #ddd5ec;
+      --primary: #6d4aff;
+      --primary-hover: #5737df;
       --focus: #ffbf47;
-      --success: #0f766e;
-      --hero-start: #0a2d73;
-      --hero-mid: #0c49b8;
-      --hero-end: #2a79f0;
-      --shadow: 0 22px 56px rgba(12, 32, 77, 0.14);
-      --shadow-soft: 0 12px 30px rgba(12, 32, 77, 0.08);
+      --success: #1d8b72;
+      --accent: #39d0c6;
+      --accent-soft: #d8fbf5;
+      --hero-start: #23144f;
+      --hero-mid: #4c2cb4;
+      --hero-end: #6d4aff;
+      --shadow: 0 22px 56px rgba(38, 23, 82, 0.16);
+      --shadow-soft: 0 12px 30px rgba(38, 23, 82, 0.09);
       --radius: 24px;
     }
 
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #09111f;
-        --bg-2: #0d1728;
-        --panel: rgba(10, 18, 32, 0.86);
-        --panel-solid: #0f1b31;
-        --panel-muted: #122038;
-        --text: #f3f7ff;
-        --muted: #b2bfd3;
-        --border: #25334d;
-        --primary: #5a8fff;
-        --primary-hover: #7ca6ff;
-        --success: #5fd0b7;
-        --hero-start: #061b46;
-        --hero-mid: #0b347f;
-        --hero-end: #1659cf;
-        --shadow: 0 22px 56px rgba(0, 0, 0, 0.38);
+        --bg: #0b0915;
+        --bg-2: #120f21;
+        --panel: rgba(17, 14, 31, 0.88);
+        --panel-solid: #171328;
+        --panel-muted: #1d1830;
+        --text: #f7f4ff;
+        --muted: #beb6d6;
+        --border: #31294a;
+        --primary: #9a86ff;
+        --primary-hover: #b09dff;
+        --success: #63dfc8;
+        --accent: #57e6da;
+        --accent-soft: rgba(87,230,218,0.12);
+        --hero-start: #11092b;
+        --hero-mid: #2a1773;
+        --hero-end: #5c35df;
+        --shadow: 0 22px 56px rgba(0, 0, 0, 0.42);
         --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.26);
       }
     }
@@ -54,7 +58,8 @@
       margin: 0;
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background:
-        radial-gradient(circle at top left, rgba(110, 159, 255, 0.22) 0, transparent 30%),
+        radial-gradient(circle at top left, rgba(109, 74, 255, 0.18) 0, transparent 28%),
+        radial-gradient(circle at bottom right, rgba(57, 208, 198, 0.12) 0, transparent 26%),
         linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 44%, var(--bg-2) 100%);
       color: var(--text);
       min-height: 100vh;
@@ -76,120 +81,101 @@
 
     .hero {
       position: relative;
-      background: linear-gradient(155deg, var(--hero-start) 0%, var(--hero-mid) 52%, var(--hero-end) 100%);
+      background:
+        radial-gradient(circle at top right, rgba(255,255,255,0.12), transparent 28%),
+        linear-gradient(155deg, var(--hero-start) 0%, var(--hero-mid) 52%, var(--hero-end) 100%);
       color: white;
       box-shadow: var(--shadow);
       padding: 1.7rem;
       display: grid;
-      grid-template-rows: auto auto 1fr auto auto;
+      grid-template-rows: auto auto 1fr auto;
       gap: 1rem;
     }
     .hero::before, .hero::after {
-      content: ""; position: absolute; border-radius: 999px; background: rgba(255,255,255,0.09); z-index: 0;
+      content: ""; position: absolute; border-radius: 999px; background: rgba(255,255,255,0.08); z-index: 0;
     }
-    .hero::before { width: 280px; height: 280px; top: -100px; right: -70px; }
-    .hero::after { width: 200px; height: 200px; bottom: -70px; left: -50px; }
+    .hero::before { width: 300px; height: 300px; top: -110px; right: -80px; }
+    .hero::after { width: 220px; height: 220px; bottom: -80px; left: -60px; }
     .hero > * { position: relative; z-index: 1; }
 
     .hero-topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .brand { display: inline-flex; align-items: center; gap: 0.9rem; font-weight: 800; letter-spacing: 0.01em; font-size: 1.08rem; }
+    .brand { display: inline-flex; align-items: center; gap: 1rem; font-weight: 800; letter-spacing: 0.01em; font-size: 1.08rem; }
     .logo {
-      width: 3.1rem; height: 3.1rem; border-radius: 18px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.24);
-      display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.14), 0 8px 20px rgba(2,12,38,0.16); flex: 0 0 auto;
+      width: 3.3rem; height: 3.3rem; border-radius: 18px; background: linear-gradient(145deg, rgba(255,255,255,0.24), rgba(255,255,255,0.08));
+      border: 1px solid rgba(255,255,255,0.24); display: grid; place-items: center; box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), 0 10px 22px rgba(12, 6, 33, 0.2); flex: 0 0 auto;
     }
-    .logo svg { width: 1.8rem; height: 1.8rem; display: block; }
-    .brand-text { display: flex; flex-direction: column; line-height: 1.05; }
-    .brand-text small { font-size: 0.72rem; font-weight: 600; opacity: 0.84; letter-spacing: 0.08em; text-transform: uppercase; }
+    .logo svg { width: 2rem; height: 2rem; display: block; }
+    .brand-text { display: flex; flex-direction: column; line-height: 1.02; }
+    .brand-text strong { font-size: 1.08rem; font-weight: 800; }
+    .brand-text small { font-size: 0.72rem; font-weight: 700; opacity: 0.88; letter-spacing: 0.12em; text-transform: uppercase; }
 
     .hero-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
     .hero-pill {
-      padding: 0.48rem 0.8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.1);
-      color: rgba(255,255,255,0.92); font-size: 0.84rem; font-weight: 600;
+      padding: 0.48rem 0.8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.09);
+      color: rgba(255,255,255,0.94); font-size: 0.82rem; font-weight: 700;
     }
 
-    .hero-copy h1 { margin: 0 0 0.75rem; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.02; max-width: 9ch; }
+    .hero-copy h1 { margin: 0 0 0.75rem; font-size: clamp(2rem, 4vw, 3.05rem); line-height: 1.02; max-width: 10ch; }
     .hero-copy p { margin: 0; max-width: 50ch; color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.55; }
+    .hero-copy .tagline {
+      display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8);
+    }
+    .hero-copy .tagline::before {
+      content: ""; width: 0.9rem; height: 0.14rem; border-radius: 99px; background: var(--accent);
+    }
 
-    .app-preview { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0.9rem; align-items: stretch; }
+    .brand-motif {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0.9rem; align-items: stretch;
+    }
     .preview-panel, .mini-side {
-      background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.15); border-radius: 22px; backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.14); border-radius: 22px; backdrop-filter: blur(8px);
     }
     .preview-panel { padding: 1rem; }
     .preview-head { display: flex; justify-content: space-between; gap: 1rem; align-items: center; margin-bottom: 0.9rem; }
     .preview-title { font-size: 0.95rem; font-weight: 700; }
     .preview-sub { color: rgba(255,255,255,0.78); font-size: 0.82rem; }
     .balance-card {
-      padding: 1rem; border-radius: 18px; background: linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.07)); border: 1px solid rgba(255,255,255,0.14); margin-bottom: 0.9rem;
+      padding: 1rem; border-radius: 20px; background: linear-gradient(135deg, rgba(57,208,198,0.2), rgba(255,255,255,0.08)); border: 1px solid rgba(255,255,255,0.15); margin-bottom: 0.9rem;
     }
     .balance-label { color: rgba(255,255,255,0.74); font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; }
-    .balance-value { font-size: 1.9rem; font-weight: 800; margin: 0.35rem 0; }
+    .balance-value { font-size: 1.95rem; font-weight: 800; margin: 0.35rem 0; }
     .balance-meta { display: flex; gap: 0.6rem; flex-wrap: wrap; color: rgba(255,255,255,0.8); font-size: 0.85rem; }
     .quick-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; }
     .quick-actions span {
-      display: grid; place-items: center; min-height: 4.2rem; padding: 0.6rem; border-radius: 16px; background: rgba(255,255,255,0.1); font-size: 0.85rem; text-align: center;
+      display: grid; place-items: center; min-height: 4.1rem; padding: 0.6rem; border-radius: 16px; background: rgba(255,255,255,0.08); font-size: 0.84rem; text-align: center;
     }
     .mini-side { padding: 1rem; display: grid; gap: 0.8rem; }
     .mini-card {
-      padding: 1rem; border-radius: 18px; background: linear-gradient(140deg, rgba(255,255,255,0.22), rgba(255,255,255,0.08)); border: 1px solid rgba(255,255,255,0.2); box-shadow: var(--shadow-soft);
+      padding: 1rem; border-radius: 20px; background: linear-gradient(145deg, rgba(255,255,255,0.16), rgba(255,255,255,0.05)); border: 1px solid rgba(255,255,255,0.16); box-shadow: var(--shadow-soft);
     }
     .mini-card-top, .mini-card-bottom { display: flex; justify-content: space-between; align-items: center; }
     .mini-card-top { margin-bottom: 1.4rem; font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.82); }
-    .mini-chip { width: 2rem; height: 1.5rem; border-radius: 8px; background: linear-gradient(135deg, #ffdb82, #f5b326); }
+    .mini-chip { width: 2rem; height: 1.5rem; border-radius: 8px; background: linear-gradient(135deg, #73fff2, #39d0c6); }
     .mini-card-number { font-size: 0.98rem; letter-spacing: 0.16em; margin-bottom: 0.9rem; color: rgba(255,255,255,0.95); }
     .mini-card-bottom { font-size: 0.78rem; color: rgba(255,255,255,0.82); }
-    .mini-stat { padding: 0.85rem 0.9rem; border-radius: 16px; background: rgba(255,255,255,0.09); }
+    .mini-stat {
+      padding: 0.85rem 0.9rem; border-radius: 16px; background: rgba(255,255,255,0.08); border-left: 3px solid var(--accent);
+    }
     .mini-stat strong { display: block; font-size: 1rem; }
     .mini-stat span { font-size: 0.82rem; color: rgba(255,255,255,0.78); }
 
-    .mobile-showcase {
-      display: flex; justify-content: center; align-items: center; margin-top: 0.25rem;
-    }
-    .phone {
-      width: 230px; border-radius: 34px; padding: 10px; background: rgba(8, 17, 35, 0.75); border: 1px solid rgba(255,255,255,0.16);
-      box-shadow: 0 20px 45px rgba(1, 8, 25, 0.28);
-    }
-    .phone-screen {
-      border-radius: 26px; overflow: hidden; padding: 0.9rem; background: linear-gradient(180deg, rgba(7,22,56,0.98), rgba(19,46,110,0.96)); min-height: 415px;
-      display: grid; gap: 0.85rem;
-    }
-    .phone-top {
-      display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; color: rgba(255,255,255,0.92);
-    }
-    .phone-balance {
-      padding: 0.95rem; border-radius: 18px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.14);
-    }
-    .phone-balance small, .phone-list span, .phone-chip-row span { color: rgba(255,255,255,0.74); }
-    .phone-balance strong { display: block; font-size: 1.55rem; margin-top: 0.3rem; }
-    .phone-chip-row { display: flex; gap: 0.45rem; flex-wrap: wrap; font-size: 0.75rem; }
-    .phone-chip-row b {
-      font-weight: 700; color: white; background: rgba(255,255,255,0.12); border-radius: 999px; padding: 0.28rem 0.55rem;
-    }
-    .phone-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.45rem; }
-    .phone-actions div {
-      min-height: 3.9rem; border-radius: 16px; background: rgba(255,255,255,0.1); display: grid; place-items: center; text-align: center; font-size: 0.72rem; padding: 0.4rem;
-    }
-    .phone-list {
-      padding: 0.85rem; border-radius: 18px; background: rgba(255,255,255,0.09); display: grid; gap: 0.75rem;
-    }
-    .phone-item { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
-    .phone-item strong { display: block; font-size: 0.82rem; }
-    .phone-item small { color: rgba(255,255,255,0.72); }
-
-    .hero-note { color: rgba(255,255,255,0.78); font-size: 0.92rem; line-height: 1.45; }
+    .hero-note { color: rgba(255,255,255,0.8); font-size: 0.92rem; line-height: 1.45; }
 
     .card-wrap { display: grid; place-items: center; }
     .card {
-      width: 100%; background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 8%, transparent); box-shadow: var(--shadow); backdrop-filter: blur(10px);
+      width: 100%; background: var(--panel); border: 1px solid color-mix(in srgb, var(--text) 7%, transparent); box-shadow: var(--shadow); backdrop-filter: blur(10px);
       padding: 1.5rem; display: grid; align-content: center;
     }
     .eyebrow {
-      display: inline-flex; align-items: center; gap: 0.5rem; color: var(--success); background: color-mix(in srgb, var(--success) 10%, transparent);
-      border: 1px solid color-mix(in srgb, var(--success) 24%, transparent); border-radius: 999px; padding: 0.42rem 0.78rem; font-size: 0.88rem; font-weight: 700; width: fit-content;
+      display: inline-flex; align-items: center; gap: 0.5rem; color: var(--success); background: color-mix(in srgb, var(--accent) 18%, transparent);
+      border: 1px solid color-mix(in srgb, var(--accent) 36%, transparent); border-radius: 999px; padding: 0.42rem 0.78rem; font-size: 0.88rem; font-weight: 700; width: fit-content;
     }
-    .card h2 { margin: 0.95rem 0 0.35rem; font-size: 1.85rem; line-height: 1.1; }
+    .card h2 { margin: 0.95rem 0 0.25rem; font-size: 1.9rem; line-height: 1.08; }
     .card-intro { margin: 0 0 1rem; color: var(--muted); line-height: 1.5; font-size: 0.95rem; }
     .shortcut-row { display: flex; gap: 0.55rem; flex-wrap: wrap; margin-bottom: 1rem; }
-    .shortcut { padding: 0.5rem 0.75rem; border-radius: 999px; background: var(--panel-muted); border: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; font-weight: 700; }
+    .shortcut {
+      padding: 0.5rem 0.75rem; border-radius: 999px; background: var(--panel-muted); border: 1px solid var(--border); color: var(--muted); font-size: 0.82rem; font-weight: 700;
+    }
     form { display: grid; gap: 0.85rem; }
     .field { display: grid; gap: 0.38rem; }
     label { font-weight: 700; font-size: 0.94rem; }
@@ -198,8 +184,8 @@
       width: 100%; min-height: 3.1rem; border: 1px solid var(--border); border-radius: 14px; padding: 0.82rem 0.95rem; font: inherit; color: var(--text);
       background: var(--panel-solid); transition: border-color 120ms ease, box-shadow 120ms ease;
     }
-    input::placeholder { color: color-mix(in srgb, var(--muted) 85%, transparent); }
-    input:hover, input:focus-visible { border-color: color-mix(in srgb, var(--primary) 45%, white); box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent); }
+    input::placeholder { color: color-mix(in srgb, var(--muted) 88%, transparent); }
+    input:hover, input:focus-visible { border-color: color-mix(in srgb, var(--primary) 40%, white); box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 12%, transparent); }
     .inline-row { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .check { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--muted); font-size: 0.93rem; line-height: 1.35; }
     .check input { width: 1.05rem; height: 1.05rem; min-height: auto; margin: 0; accent-color: var(--primary); flex: 0 0 auto; box-shadow: none; }
@@ -207,8 +193,12 @@
       width: 100%; min-height: 3.2rem; border: 0; border-radius: 14px; font: inherit; font-weight: 800; cursor: pointer; transition: transform 120ms ease, background 120ms ease, box-shadow 120ms ease;
     }
     .btn:hover { transform: translateY(-1px); }
-    .btn-primary { background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 80%, white) 0%, var(--primary) 100%); color: white; box-shadow: 0 14px 24px color-mix(in srgb, var(--primary) 24%, transparent); }
-    .btn-primary:hover { background: linear-gradient(180deg, color-mix(in srgb, var(--primary-hover) 75%, white) 0%, var(--primary-hover) 100%); }
+    .btn-primary {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 82%, white) 0%, var(--primary) 100%); color: white; box-shadow: 0 14px 24px color-mix(in srgb, var(--primary) 24%, transparent);
+    }
+    .btn-primary:hover {
+      background: linear-gradient(180deg, color-mix(in srgb, var(--primary-hover) 78%, white) 0%, var(--primary-hover) 100%);
+    }
     .btn-secondary { background: var(--panel-muted); color: var(--text); border: 1px solid var(--border); }
     .or { display: grid; grid-template-columns: 1fr auto 1fr; gap: 0.75rem; align-items: center; color: var(--muted); font-size: 0.9rem; margin: 0.05rem 0; }
     .or::before, .or::after { content: ""; height: 1px; background: var(--border); }
@@ -226,7 +216,7 @@
 
     @media (max-width: 1100px) {
       .shell { grid-template-columns: 1fr 460px; }
-      .app-preview { grid-template-columns: 1fr; }
+      .brand-motif { grid-template-columns: 1fr; }
     }
     @media (max-width: 920px) {
       .page { padding: 0.85rem; }
@@ -239,7 +229,6 @@
       .hero-copy h1 { max-width: none; font-size: 1.95rem; }
       .hero-copy p { font-size: 0.96rem; }
       .quick-actions { grid-template-columns: 1fr 1fr 1fr; }
-      .phone { width: min(100%, 250px); }
       .card h2 { font-size: 1.6rem; }
       input, .btn { min-height: 3.45rem; }
       .sub-links, .footer-links { flex-direction: column; gap: 0.55rem; }
@@ -255,35 +244,36 @@
           <div class="brand" aria-label="bu banking">
             <div class="logo" aria-hidden="true">
               <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="8" y="8" width="48" height="48" rx="16" fill="white" fill-opacity="0.12"/>
-                <path d="M22 19H35.8C41.4 19 45 22.2 45 27.2C45 30.8 43 33.4 39.8 34.3C44 35.1 46.4 38 46.4 42C46.4 47.7 42.3 51 35.6 51H22V19ZM34.2 32.2C37.5 32.2 39.4 30.7 39.4 28C39.4 25.2 37.6 23.8 34.2 23.8H27V32.2H34.2ZM35 46.2C38.9 46.2 41 44.6 41 41.6C41 38.5 38.9 36.8 34.9 36.8H27V46.2H35Z" fill="white"/>
+                <rect x="7" y="7" width="50" height="50" rx="18" fill="white" fill-opacity="0.12"/>
+                <path d="M18 24.5C18 18.7 21.9 15 28.1 15H33.8C40.1 15 44 18.7 44 24.5V39.5C44 45.3 40.1 49 33.8 49H28.1C21.9 49 18 45.3 18 39.5V24.5ZM28.5 20.1C24.7 20.1 22.9 22 22.9 25.2V38.8C22.9 42.1 24.7 43.9 28.5 43.9H30.4V20.1H28.5ZM35.4 43.9C39.2 43.9 41.1 42.1 41.1 38.8V25.2C41.1 22 39.2 20.1 35.4 20.1H33.5V43.9H35.4Z" fill="white"/>
               </svg>
             </div>
             <div class="brand-text">
-              <span>bu banking</span>
-              <small>secure personal banking</small>
+              <strong>bu banking</strong>
+              <small>Simple. Secure. Yours.</small>
             </div>
           </div>
           <div class="hero-actions" aria-label="Product highlights">
             <span class="hero-pill">24/7 monitoring</span>
             <span class="hero-pill">Instant transfers</span>
-            <span class="hero-pill">Face ID ready</span>
+            <span class="hero-pill">Smart everyday banking</span>
           </div>
         </div>
 
         <div class="hero-copy">
-          <h1 id="welcome-heading">Secure banking with less friction.</h1>
-          <p>A cleaner sign-in experience for everyday users — simple to read, quick to use, and designed to feel credible on both laptop and mobile.</p>
+          <div class="tagline">Distinctive digital banking</div>
+          <h1 id="welcome-heading">Secure banking with a calmer, clearer feel.</h1>
+          <p>bu banking is designed to feel modern without becoming flashy — with a cleaner look, a softer premium edge, and a more distinctive identity across every auth screen.</p>
         </div>
 
-        <div class="app-preview" aria-label="Banking app preview">
+        <div class="brand-motif" aria-label="Brand preview">
           <div class="preview-panel">
             <div class="preview-head">
               <div>
-                <div class="preview-title">Everyday account</div>
-                <div class="preview-sub">A quick glimpse of the app after sign-in</div>
+                <div class="preview-title">Signature account view</div>
+                <div class="preview-sub">Distinctive palette, softer premium contrast, and everyday clarity</div>
               </div>
-              <div class="hero-pill">Live preview</div>
+              <div class="hero-pill">bu identity</div>
             </div>
             <div class="balance-card">
               <div class="balance-label">Available balance</div>
@@ -303,7 +293,7 @@
           <div class="mini-side">
             <div class="mini-card" aria-hidden="true">
               <div class="mini-card-top">
-                <span>bu banking</span>
+                <span>bu signature card</span>
                 <span class="mini-chip"></span>
               </div>
               <div class="mini-card-number">•••• 2846</div>
@@ -312,57 +302,8 @@
                 <span>Visa</span>
               </div>
             </div>
-            <div class="mini-stat"><strong>Protected</strong><span>Encryption, device checks, and fraud monitoring enabled.</span></div>
-            <div class="mini-stat"><strong>Accessible</strong><span>Readable contrast, keyboard support, and larger touch targets.</span></div>
-          </div>
-        </div>
-
-        <div class="mobile-showcase" aria-label="Mobile banking app concept preview">
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="phone-top">
-                <span>9:41</span>
-                <span>bu banking</span>
-                <span>5G 🔋</span>
-              </div>
-              <div class="phone-balance">
-                <small>Available balance</small>
-                <strong>£4,280.24</strong>
-                <div class="phone-chip-row">
-                  <b>Current</b>
-                  <span>Card active</span>
-                </div>
-              </div>
-              <div class="phone-actions">
-                <div>Send</div>
-                <div>Pay</div>
-                <div>Cards</div>
-                <div>More</div>
-              </div>
-              <div class="phone-list">
-                <div class="phone-item">
-                  <div>
-                    <strong>Grocery Market</strong>
-                    <small>Today, 14:22</small>
-                  </div>
-                  <span>-£24.80</span>
-                </div>
-                <div class="phone-item">
-                  <div>
-                    <strong>Salary payment</strong>
-                    <small>Today, 09:03</small>
-                  </div>
-                  <span>+£2,450.00</span>
-                </div>
-                <div class="phone-item">
-                  <div>
-                    <strong>Streaming service</strong>
-                    <small>Yesterday</small>
-                  </div>
-                  <span>-£9.99</span>
-                </div>
-              </div>
-            </div>
+            <div class="mini-stat"><strong>Distinctive by design</strong><span>Violet-led palette with teal highlights for a calmer, recognisable look.</span></div>
+            <div class="mini-stat"><strong>Approachable trust</strong><span>Soft premium styling without losing clarity or credibility.</span></div>
           </div>
         </div>
 
@@ -371,13 +312,13 @@
 
       <section class="card-wrap" aria-label="Login panel">
         <div class="card">
-          <span class="eyebrow" aria-label="Security notice">🔒 Secure login</span>
+          <span class="eyebrow" aria-label="Security notice">✦ Secure login</span>
           <h2>Welcome back</h2>
-          <p class="card-intro">Sign in with your email or customer ID. This layout is designed to fit on one laptop screen while still feeling polished on mobile.</p>
+          <p class="card-intro">Sign in with your email or customer ID. The page stays laptop-first, one-screen, and consistent with the new bu banking brand language.</p>
           <div class="shortcut-row" aria-label="Secondary actions">
             <a class="shortcut" href="signup.html">Create account</a>
             <a class="shortcut" href="forgot-password.html">Reset password</a>
-            <span class="shortcut">Desktop + mobile ready</span>
+            <span class="shortcut">Distinct bu branding</span>
           </div>
 
           <form action="#" method="post">
