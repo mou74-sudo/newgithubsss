@@ -86,10 +86,11 @@
         linear-gradient(155deg, var(--hero-start) 0%, var(--hero-mid) 52%, var(--hero-end) 100%);
       color: white;
       box-shadow: none;
-      padding: 2rem 2.1rem;
+      padding: 1.5rem 1.8rem;
       display: grid;
-      grid-template-rows: auto auto 1fr;
-      gap: 1rem;
+      grid-template-rows: auto 1fr;
+      gap: 0.5rem;
+      min-height: 100vh;
     }
     .hero::before, .hero::after {
       content: ""; position: absolute; border-radius: 999px; background: rgba(255,255,255,0.08); z-index: 0;
@@ -98,7 +99,7 @@
     .hero::after { width: 220px; height: 220px; bottom: -80px; left: -60px; }
     .hero > * { position: relative; z-index: 1; }
 
-    .hero-topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .hero-topbar { display: flex; justify-content: flex-start; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .brand { display: inline-flex; align-items: center; gap: 1rem; font-weight: 800; letter-spacing: 0.01em; font-size: 1.08rem; }
     .logo {
       width: 3.3rem; height: 3.3rem; border-radius: 18px; background: linear-gradient(145deg, rgba(255,255,255,0.24), rgba(255,255,255,0.08));
@@ -109,14 +110,16 @@
     .brand-text strong { font-size: 1.08rem; font-weight: 800; }
     .brand-text small { font-size: 0.72rem; font-weight: 700; opacity: 0.88; letter-spacing: 0.12em; text-transform: uppercase; }
 
-    .hero-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
-    .hero-pill {
-      padding: 0.48rem 0.8rem; border-radius: 999px; border: 1px solid rgba(255,255,255,0.16); background: rgba(255,255,255,0.09);
-      color: rgba(255,255,255,0.94); font-size: 0.82rem; font-weight: 700;
+    .hero-copy {
+      display: grid;
+      align-content: center;
+      justify-items: start;
+      gap: 0.9rem;
+      padding: 0 0 1rem;
+      max-width: 38rem;
     }
-
-    .hero-copy h1 { margin: 0 0 0.55rem; font-size: clamp(1.75rem, 3.1vw, 2.55rem); line-height: 1.02; max-width: 11ch; }
-    .hero-copy p { margin: 0; max-width: 46ch; color: rgba(255,255,255,0.9); font-size: 0.95rem; line-height: 1.45; }
+    .hero-copy h1 { margin: 0; font-size: clamp(2.6rem, 5.2vw, 5.25rem); line-height: 0.96; max-width: 8ch; }
+    .hero-copy p { margin: 0; max-width: 34rem; color: rgba(255,255,255,0.88); font-size: 1.05rem; line-height: 1.55; }
     .hero-copy .tagline {
       display: inline-flex; align-items: center; gap: 0.5rem; margin-bottom: 0.8rem; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.8);
     }
@@ -124,73 +127,8 @@
       content: ""; width: 0.9rem; height: 0.14rem; border-radius: 99px; background: var(--accent);
     }
 
-    .brand-motif {
-      display: block;
-      margin-top: auto;
-    }
-    .preview-panel {
-      min-height: 100%;
-      display: grid;
-      align-content: stretch;
-      gap: 1rem;
-      padding: 1.25rem;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.12));
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 28px 28px 0 0;
-      backdrop-filter: blur(10px);
-    }
-    .preview-copy {
-      max-width: 44rem;
-      display: grid;
-      gap: 0.8rem;
-    }
-    .preview-kicker {
-      display: inline-flex;
-      width: fit-content;
-      align-items: center;
-      gap: 0.45rem;
-      padding: 0.5rem 0.85rem;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.14);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-    .preview-copy h3 {
-      margin: 0;
-      font-size: clamp(1.4rem, 2.2vw, 2rem);
-      line-height: 1.08;
-    }
-    .preview-copy p {
-      margin: 0;
-      max-width: 38rem;
-      color: rgba(255,255,255,0.82);
-      font-size: 0.96rem;
-      line-height: 1.55;
-    }
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 0.9rem;
-    }
-    .feature-card {
-      min-height: 100%;
-      padding: 1rem;
-      border-radius: 20px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-    .feature-card strong {
-      display: block;
-      margin-bottom: 0.35rem;
-      font-size: 0.95rem;
-    }
-    .feature-card span {
-      color: rgba(255,255,255,0.78);
-      font-size: 0.88rem;
-      line-height: 1.5;
+    .hero-spacer {
+      min-height: 0;
     }
 
     .card-wrap { display: grid; place-items: stretch; }
@@ -247,46 +185,57 @@
     .footer-links { display: flex; gap: 0.9rem; flex-wrap: wrap; }
 
     @media (max-width: 1100px) {
-      .shell { grid-template-columns: 1fr 430px; }
-      .feature-grid { grid-template-columns: 1fr; }
+      .shell { grid-template-columns: 1fr 420px; }
+      .hero-copy h1 { font-size: clamp(2.2rem, 4.6vw, 4.3rem); }
     }
     @media (max-height: 900px) and (min-width: 921px) {
-      .hero-actions,
       .support-box,
-      .site-footer {
+      .site-footer,
+      .legal,
+      .shortcut-row,
+      .hint {
         display: none;
       }
-      .shortcut-row { margin-bottom: 0.7rem; }
-      .hero-copy .tagline { margin-bottom: 0.5rem; }
-      .preview-panel { padding: 1rem; gap: 0.8rem; }
-      .feature-card { padding: 0.85rem; }
-    }
-    @media (max-height: 780px) and (min-width: 921px) {
-      .feature-grid {
-        grid-template-columns: 1fr;
+      .hero {
+        padding: 1.2rem 1.5rem;
+      }
+      .card {
+        padding: 1.4rem 1.35rem;
+      }
+      .hero-copy h1 {
+        font-size: clamp(2.1rem, 4.4vw, 4rem);
       }
       .hero-copy p,
-      .card-intro,
-      .legal,
-      .hint,
-      .preview-copy p,
-      .feature-card span {
-        font-size: 0.84rem;
+      .card-intro {
+        font-size: 0.92rem;
+      }
+    }
+    @media (max-height: 760px) and (min-width: 921px) {
+      .eyebrow,
+      .or,
+      .btn-secondary {
+        display: none;
+      }
+      .hero-copy .tagline {
+        margin-bottom: 0.35rem;
+      }
+      .hero-copy {
+        gap: 0.65rem;
       }
     }
     @media (max-width: 920px) {
       .shell { min-height: auto; grid-template-columns: 1fr; }
       .hero, .card { min-height: auto; }
       .hero, .card { padding: 1.2rem; }
-      .preview-panel { border-radius: 22px; }
+      .hero-copy { align-content: start; }
+      .hero-copy h1 { max-width: none; font-size: clamp(2.1rem, 9vw, 3.8rem); }
     }
     @media (max-width: 640px) {
       .hero, .card { padding: 1rem; }
-      .hero-copy h1 { max-width: none; font-size: 1.95rem; }
+      .hero-copy h1 { max-width: none; font-size: 2.4rem; }
       .hero-copy p { font-size: 0.96rem; }
-      .feature-grid { grid-template-columns: 1fr; }
       .card h2 { font-size: 1.6rem; }
-      input, .btn { min-height: 3.45rem; }
+      input, .btn { min-height: 3.2rem; }
       .sub-links, .footer-links { flex-direction: column; gap: 0.55rem; }
       .site-footer { flex-direction: column; }
     }
@@ -309,11 +258,6 @@
               <small>Simple. Secure. Yours.</small>
             </div>
           </div>
-          <div class="hero-actions" aria-label="Product highlights">
-            <span class="hero-pill">24/7 monitoring</span>
-            <span class="hero-pill">Instant transfers</span>
-            <span class="hero-pill">Smart everyday banking</span>
-          </div>
         </div>
 
         <div class="hero-copy">
@@ -322,29 +266,7 @@
           <p>bu banking is designed to feel modern without becoming flashy — with a cleaner look, a softer premium edge, and a more distinctive identity across every auth screen.</p>
         </div>
 
-        <div class="brand-motif" aria-label="Brand preview">
-          <div class="preview-panel">
-            <div class="preview-copy">
-              <span class="preview-kicker">Built around everyday clarity</span>
-              <h3>Banking designed to feel clean, direct, and easy to trust on a laptop screen.</h3>
-              <p>The left side now works as one uninterrupted branded panel instead of stacked boxes — giving the layout more breathing room while keeping the message strong, readable, and premium.</p>
-            </div>
-            <div class="feature-grid">
-              <div class="feature-card">
-                <strong>Calmer layout</strong>
-                <span>Less clutter, fewer nested cards, and smoother spacing all the way to the edges.</span>
-              </div>
-              <div class="feature-card">
-                <strong>Clearer hierarchy</strong>
-                <span>The core message takes over the space instead of fighting with a fake dashboard widget.</span>
-              </div>
-              <div class="feature-card">
-                <strong>Laptop-first fit</strong>
-                <span>Built to sit cleaner in a desktop browser without awkward gaps or floating blocks.</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="hero-spacer" aria-hidden="true"></div>
       </section>
 
       <section class="card-wrap" aria-label="Login panel">
