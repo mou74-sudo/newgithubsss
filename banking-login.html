@@ -81,7 +81,7 @@
       box-shadow: var(--shadow);
       padding: 1.7rem;
       display: grid;
-      grid-template-rows: auto auto 1fr auto;
+      grid-template-rows: auto auto 1fr auto auto;
       gap: 1rem;
     }
     .hero::before, .hero::after {
@@ -91,9 +91,7 @@
     .hero::after { width: 200px; height: 200px; bottom: -70px; left: -50px; }
     .hero > * { position: relative; z-index: 1; }
 
-    .hero-topbar {
-      display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;
-    }
+    .hero-topbar { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .brand { display: inline-flex; align-items: center; gap: 0.9rem; font-weight: 800; letter-spacing: 0.01em; font-size: 1.08rem; }
     .logo {
       width: 3.1rem; height: 3.1rem; border-radius: 18px; background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.24);
@@ -112,9 +110,7 @@
     .hero-copy h1 { margin: 0 0 0.75rem; font-size: clamp(2rem, 4vw, 3.1rem); line-height: 1.02; max-width: 9ch; }
     .hero-copy p { margin: 0; max-width: 50ch; color: rgba(255,255,255,0.9); font-size: 1rem; line-height: 1.55; }
 
-    .app-preview {
-      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0.9rem; align-items: stretch;
-    }
+    .app-preview { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 0.9rem; align-items: stretch; }
     .preview-panel, .mini-side {
       background: rgba(255,255,255,0.11); border: 1px solid rgba(255,255,255,0.15); border-radius: 22px; backdrop-filter: blur(8px);
     }
@@ -144,6 +140,40 @@
     .mini-stat { padding: 0.85rem 0.9rem; border-radius: 16px; background: rgba(255,255,255,0.09); }
     .mini-stat strong { display: block; font-size: 1rem; }
     .mini-stat span { font-size: 0.82rem; color: rgba(255,255,255,0.78); }
+
+    .mobile-showcase {
+      display: flex; justify-content: center; align-items: center; margin-top: 0.25rem;
+    }
+    .phone {
+      width: 230px; border-radius: 34px; padding: 10px; background: rgba(8, 17, 35, 0.75); border: 1px solid rgba(255,255,255,0.16);
+      box-shadow: 0 20px 45px rgba(1, 8, 25, 0.28);
+    }
+    .phone-screen {
+      border-radius: 26px; overflow: hidden; padding: 0.9rem; background: linear-gradient(180deg, rgba(7,22,56,0.98), rgba(19,46,110,0.96)); min-height: 415px;
+      display: grid; gap: 0.85rem;
+    }
+    .phone-top {
+      display: flex; justify-content: space-between; align-items: center; font-size: 0.76rem; color: rgba(255,255,255,0.92);
+    }
+    .phone-balance {
+      padding: 0.95rem; border-radius: 18px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.14);
+    }
+    .phone-balance small, .phone-list span, .phone-chip-row span { color: rgba(255,255,255,0.74); }
+    .phone-balance strong { display: block; font-size: 1.55rem; margin-top: 0.3rem; }
+    .phone-chip-row { display: flex; gap: 0.45rem; flex-wrap: wrap; font-size: 0.75rem; }
+    .phone-chip-row b {
+      font-weight: 700; color: white; background: rgba(255,255,255,0.12); border-radius: 999px; padding: 0.28rem 0.55rem;
+    }
+    .phone-actions { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.45rem; }
+    .phone-actions div {
+      min-height: 3.9rem; border-radius: 16px; background: rgba(255,255,255,0.1); display: grid; place-items: center; text-align: center; font-size: 0.72rem; padding: 0.4rem;
+    }
+    .phone-list {
+      padding: 0.85rem; border-radius: 18px; background: rgba(255,255,255,0.09); display: grid; gap: 0.75rem;
+    }
+    .phone-item { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
+    .phone-item strong { display: block; font-size: 0.82rem; }
+    .phone-item small { color: rgba(255,255,255,0.72); }
 
     .hero-note { color: rgba(255,255,255,0.78); font-size: 0.92rem; line-height: 1.45; }
 
@@ -189,6 +219,11 @@
     .sub-links { display: flex; flex-wrap: wrap; gap: 0.8rem 1rem; margin-top: 0.8rem; font-size: 0.92rem; }
     .legal { margin-top: 0.85rem; color: var(--muted); font-size: 0.82rem; line-height: 1.4; }
 
+    .site-footer {
+      margin-top: 1rem; display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--border); padding-top: 0.9rem;
+    }
+    .footer-links { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+
     @media (max-width: 1100px) {
       .shell { grid-template-columns: 1fr 460px; }
       .app-preview { grid-template-columns: 1fr; }
@@ -204,9 +239,11 @@
       .hero-copy h1 { max-width: none; font-size: 1.95rem; }
       .hero-copy p { font-size: 0.96rem; }
       .quick-actions { grid-template-columns: 1fr 1fr 1fr; }
+      .phone { width: min(100%, 250px); }
       .card h2 { font-size: 1.6rem; }
       input, .btn { min-height: 3.45rem; }
-      .sub-links { flex-direction: column; gap: 0.55rem; }
+      .sub-links, .footer-links { flex-direction: column; gap: 0.55rem; }
+      .site-footer { flex-direction: column; }
     }
   </style>
 </head>
@@ -280,6 +317,55 @@
           </div>
         </div>
 
+        <div class="mobile-showcase" aria-label="Mobile banking app concept preview">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-top">
+                <span>9:41</span>
+                <span>bu banking</span>
+                <span>5G 🔋</span>
+              </div>
+              <div class="phone-balance">
+                <small>Available balance</small>
+                <strong>£4,280.24</strong>
+                <div class="phone-chip-row">
+                  <b>Current</b>
+                  <span>Card active</span>
+                </div>
+              </div>
+              <div class="phone-actions">
+                <div>Send</div>
+                <div>Pay</div>
+                <div>Cards</div>
+                <div>More</div>
+              </div>
+              <div class="phone-list">
+                <div class="phone-item">
+                  <div>
+                    <strong>Grocery Market</strong>
+                    <small>Today, 14:22</small>
+                  </div>
+                  <span>-£24.80</span>
+                </div>
+                <div class="phone-item">
+                  <div>
+                    <strong>Salary payment</strong>
+                    <small>Today, 09:03</small>
+                  </div>
+                  <span>+£2,450.00</span>
+                </div>
+                <div class="phone-item">
+                  <div>
+                    <strong>Streaming service</strong>
+                    <small>Yesterday</small>
+                  </div>
+                  <span>-£9.99</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <p class="hero-note">Protected with encryption, device verification, and optional biometric sign-in on supported devices.</p>
       </section>
 
@@ -334,6 +420,17 @@
           </div>
 
           <p class="legal">By continuing, you agree to secure device checks and fraud monitoring designed to protect your account.</p>
+
+          <footer class="site-footer" aria-label="Footer links">
+            <span>© 2026 bu banking</span>
+            <div class="footer-links">
+              <a href="#">Privacy</a>
+              <a href="#">Security</a>
+              <a href="#">Accessibility</a>
+              <a href="#">Help</a>
+              <a href="#">Terms</a>
+            </div>
+          </footer>
         </div>
       </section>
     </div>
